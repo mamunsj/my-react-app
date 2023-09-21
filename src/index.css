@@ -13,26 +13,37 @@ code {
 }
 
 .app {
-  margin: 5rem auto;
+  margin: 0rem auto;
   padding: 2rem;
-  max-width: 500px;
-  border: 2px solid gray;
+  max-width: 700px;
+  min-height: 400px;
+  /* border: 2px solid gray; */
 }
 
 button {
-  padding: 0.2rem 2rem;
-  margin: 0 2rem;
+  padding: 0.5rem;
   cursor: pointer;
+  min-width: 150px;
+  margin: 0.5rem 0.2rem;
 }
 
 h1 {
   text-transform: uppercase;
-  color: rgb(0, 255, 13);
+  color: rgb(0, 0, 0);
+  text-align: center;
 }
 
-nav {
+/* .btns {
+  padding: 2rem;
   display: flex;
-  justify-content: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
   align-items: center;
-  gap: 2rem;
+  gap: 20px;
+} */
+
+input {
+  width: 100%;
+  padding: 0.4rem;
+  margin-bottom: 2rem;
 }

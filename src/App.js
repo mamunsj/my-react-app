@@ -1,52 +1,62 @@
-import { useState, useRef, useEffect } from "react";
-import { Routes, Route, Link } from "react-router-dom";
-import About from "./About";
-import Home from "./Home";
-import Video from "./Videos";
+import { useState, useRef } from "react";
 
 const App = () => {
-  const [count, setCount] = useState(0);
-  const [start, setStart] = useState(false);
-  const timerIdRef = useRef(null);
+  const inputRef = useRef(null);
+  const resultRef = useRef(null);
+  const [result, setResult] = useState(0);
 
-  useEffect(() => {
-    if (start) {
-      timerIdRef.current = setTimeout(() => {
-        setCount(count + 1);
-      }, 1);
-    }
-
-    return () => {
-      clearTimeout(timerIdRef.current);
-    };
-  }, [count, start]);
-
-  const onStart = () => {
-    setStart(true);
+  const plus = (e) => {
+    e.preventDefault();
+    setResult((result) => result + Number(inputRef.current.value));
+  };
+  const minus = (e) => {
+    e.preventDefault();
+    setResult((result) => result - Number(inputRef.current.value));
   };
 
-  const onStop = () => {
-    clearTimeout(timerIdRef.current);
-    setStart(false);
+  const divided = (e) => {
+    e.preventDefault();
+    setResult((result) => result / Number(inputRef.current.value));
+  };
+
+  const multiply = (e) => {
+    e.preventDefault();
+    setResult((result) => result * Number(inputRef.current.value));
+  };
+
+  const resetInput = (e) => {
+    e.preventDefault();
+    inputRef.current.value = 0;
+  };
+
+  const resetValue = (e) => {
+    e.preventDefault();
+    setResult((preVal) => preVal * 0);
+    inputRef.current.value = 0;
   };
 
   return (
     <div className="app">
-      <nav>
-        <Link to></Link>
-      </nav>
-      <h1>Count: {count}</h1>
-      <button onClick={onStart}>Start</button>
-      <button onClick={onStop}>Stop</button>
-      <nav>
-        <Link to={"/"}>Home</Link>
-        <Link to={"/about"}>About</Link>
-      </nav>
-      <Routes>
-        <Route path="/" element={<Home />}></Route>
-        <Route path="/about" element={<About />}></Route>
-      </Routes>
-      <Video />
+      <div>
+        <h1>Simple Calculator App</h1>
+      </div>
+      <form>
+        <p ref={resultRef}> Your result is : {result}</p>
+        <input
+          type="number"
+          pattern="[0-9]"
+          placeholder="Write a number"
+          ref={inputRef}
+        />
+        <div className="btns">
+          <button onClick={plus}>Plus</button>
+          <button onClick={minus}>Minus</button>
+          <button onClick={divided}>Divided</button>
+          <button onClick={multiply}>Multiply</button>
+          <button onClick={resetInput}>Reset Input</button>
+          <button onClick={resetValue}>Reset Value</button>
+        </div>
+      </form>
     </div>
   );
 };
